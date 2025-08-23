@@ -19,7 +19,7 @@ function Navbar() {
     <header className="flex h-12 shadow bg-background z-10 px-2">
       <nav className="flex gap-4 container">
         <div className="mr-auto flex items-center gap-2">
-          <Link href="/" className="text-lg hover:underline px-2">
+          <Link href="/" className="text-lg hover:underline">
             EA School
           </Link>
           <Badge>Admin</Badge>
