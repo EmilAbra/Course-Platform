@@ -18,7 +18,7 @@ export default function ConsumerLayout({
 
 function Navbar() {
   return (
-    <header className="flex h-12 shadow bg-background z-10 px-2">
+    <header className="flex h-12 shadow bg-background z-10">
       <nav className="flex gap-4 container">
         <Link
           href="/"
