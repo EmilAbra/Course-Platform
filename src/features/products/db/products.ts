@@ -70,7 +70,7 @@ export async function updateProduct(
       .returning();
     if (updatedProduct == null) {
       trx.rollback();
-      throw new Error("Failed to create product");
+      throw new Error("Failed to update product");
     }
 
     await trx

@@ -61,8 +61,8 @@ export function ProductTable({
                   <div className="font-semibold">{product.name}</div>
                   <div className="text-muted-foreground">
                     {formatPlural(product.coursesCount, {
-                      singular: "product",
-                      plural: "products",
+                      singular: "course",
+                      plural: "courses",
                     })}{" "}
                     • {formatPrice(product.priceInDollars)}
                   </div>
