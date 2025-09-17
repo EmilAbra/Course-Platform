@@ -1,3 +1,38 @@
-export default function Homepage() {
-  return <h1 className="container">Hi</h1>;
+import { db } from "@/drizzle/db";
+import { ProductTable } from "@/drizzle/schema";
+import { ProductCard } from "@/features/products/components/ProductCard";
+import { getProductGlobalTag } from "@/features/products/db/cache";
+import { wherePublicProducts } from "@/features/products/permissions/products";
+import { asc } from "drizzle-orm";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+
+export default async function Homepage() {
+  const products = await getPublicProducts();
+
+  return (
+    <div className="container my-6">
+      <div className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+async function getPublicProducts() {
+  "use cache";
+  cacheTag(getProductGlobalTag());
+
+  return db.query.ProductTable.findMany({
+    where: wherePublicProducts,
+    columns: {
+      id: true,
+      name: true,
+      description: true,
+      priceInDollars: true,
+      imageUrl: true,
+    },
+    orderBy: asc(ProductTable.name),
+  });
 }
